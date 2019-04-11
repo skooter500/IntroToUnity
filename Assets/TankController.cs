@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TankController : MonoBehaviour
 {
+    public GameObject bulletPrefab;
+    public Transform spawnPoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,5 +28,11 @@ public class TankController : MonoBehaviour
         transform.Translate(0, 0, speed * Time.deltaTime * Input.GetAxis("Vertical"));
         transform.Rotate(0, rotSpeed * Time.deltaTime * Input.GetAxis("Horizontal"), 0);
 
+        if (Input.GetKey(KeyCode.Space))
+        {
+            GameObject bullet = GameObject.Instantiate<GameObject>(bulletPrefab);
+            bullet.transform.position = spawnPoint.position;
+            bullet.transform.rotation = spawnPoint.rotation;
+        }
     }
 }
